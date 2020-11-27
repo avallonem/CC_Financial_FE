@@ -35,7 +35,7 @@ const Dashboard = () => {
     
       <Page
       className={classes.root}
-      title="Dashboard"
+      title="Dashboard2"
     >
       <Container maxWidth={false}>
         <Grid
