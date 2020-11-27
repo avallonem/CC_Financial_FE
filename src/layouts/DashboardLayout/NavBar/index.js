@@ -23,56 +23,52 @@ import {
   Users as UsersIcon
 } from 'react-feather';
 import NavItem from './NavItem';
+import keycloak from 'src/';
+
 
 const user = {
-  avatar: '/static/images/avatars/avatar_6.png',
-  jobTitle: 'Senior Developer',
-  name: 'Katarina Smith'
+  avatar: '/static/images/avatars/index.jpeg',
+  jobTitle: 'User',
+  name: 'User'
 };
 
-const items = [
+function getRole ()  {
+  if(keycloak.hasRealmRole('Customer')){return 'Customer';}
+  if(keycloak.hasRealmRole('Provider')){return 'Provider';}
+  else return 'NoRole';
+  }
+
+function items (){
+   if(sessionStorage.getItem('role')=='Customer'){ return [
   {
     href: '/app/dashboard',
     icon: BarChartIcon,
-    title: 'Dashboard'
+    title: 'Wallet'
+  },
+   {
+    href: '/app/products',
+    icon: ShoppingBagIcon,
+    title: 'Portfolio'
   },
   {
     href: '/app/customers',
-    icon: UsersIcon,
-    title: 'Customers'
-  },
-  {
-    href: '/app/products',
     icon: ShoppingBagIcon,
-    title: 'Products'
+    title: 'Claim Financial Asset'
   },
-  {
-    href: '/app/account',
-    icon: UserIcon,
-    title: 'Account'
-  },
-  {
-    href: '/app/settings',
-    icon: SettingsIcon,
-    title: 'Settings'
-  },
-  {
-    href: '/login',
-    icon: LockIcon,
-    title: 'Login'
-  },
-  {
-    href: '/register',
-    icon: UserPlusIcon,
-    title: 'Register'
-  },
-  {
-    href: '/404',
-    icon: AlertCircleIcon,
-    title: 'Error'
-  }
+ 
 ];
-
+}
+else {
+  return [
+    {
+      href: '/app/dashboard',
+      icon: BarChartIcon,
+      title: 'Dashboard'
+    },
+    
+   
+  ];
+}}
 const useStyles = makeStyles(() => ({
   mobileDrawer: {
     width: 256
@@ -88,6 +84,7 @@ const useStyles = makeStyles(() => ({
     height: 64
   }
 }));
+
 
 const NavBar = ({ onMobileClose, openMobile }) => {
   const classes = useStyles();
@@ -123,19 +120,19 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           color="textPrimary"
           variant="h5"
         >
-          {user.name}
+          {keycloak.idTokenParsed.name}
         </Typography>
         <Typography
           color="textSecondary"
           variant="body2"
         >
-          {user.jobTitle}
+          {getRole()}
         </Typography>
       </Box>
       <Divider />
       <Box p={2}>
         <List>
-          {items.map((item) => (
+          {items().map((item) => (
             <NavItem
               href={item.href}
               key={item.title}
@@ -146,39 +143,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         </List>
       </Box>
       <Box flexGrow={1} />
-      <Box
-        p={2}
-        m={2}
-        bgcolor="background.dark"
-      >
-        <Typography
-          align="center"
-          gutterBottom
-          variant="h4"
-        >
-          Need more?
-        </Typography>
-        <Typography
-          align="center"
-          variant="body2"
-        >
-          Upgrade to PRO version and access 20 more screens
-        </Typography>
-        <Box
-          display="flex"
-          justifyContent="center"
-          mt={2}
-        >
-          <Button
-            color="primary"
-            component="a"
-            href="https://react-material-kit.devias.io"
-            variant="contained"
-          >
-            See PRO version
-          </Button>
-        </Box>
-      </Box>
+      
     </Box>
   );
 

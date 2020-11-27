@@ -9,12 +9,15 @@ import {
   Hidden,
   IconButton,
   Toolbar,
+  Typography,
   makeStyles
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 import Logo from 'src/components/Logo';
+import keycloak from 'src/';
+import { KeyboardCapslock } from '@material-ui/icons';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -39,9 +42,14 @@ const TopBar = ({
       {...rest}
     >
       <Toolbar>
+      <Box flexGrow={0.04} />
         <RouterLink to="/">
           <Logo />
         </RouterLink>
+		<Box flexGrow={1} />
+		<Typography variant="h3" className={classes.title}>
+                   Financial Infrastructure Use Case
+          </Typography>
         <Box flexGrow={1} />
         <Hidden mdDown>
           <IconButton color="inherit">
@@ -53,15 +61,20 @@ const TopBar = ({
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <IconButton color="inherit">
+          <IconButton color="inherit" onClick={() => {
+            
+    keycloak.logout();
+  }}>
             <InputIcon />
           </IconButton>
         </Hidden>
         <Hidden lgUp>
           <IconButton
             color="inherit"
-            onClick={onMobileNavOpen}
-          >
+            onClick={() => {
+              sessionStorage.clear();
+              keycloak.logout();
+            }}>
             <MenuIcon />
           </IconButton>
         </Hidden>

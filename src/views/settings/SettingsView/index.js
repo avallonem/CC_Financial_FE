@@ -6,7 +6,8 @@ import {
 } from '@material-ui/core';
 import Page from 'src/components/Page';
 import Notifications from './Notifications';
-import Password from './Password';
+import ClaimForm from './ClaimForm';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,12 +24,12 @@ const SettingsView = () => {
   return (
     <Page
       className={classes.root}
-      title="Settings"
+      title="Claim Form"
     >
       <Container maxWidth="lg">
-        <Notifications />
         <Box mt={3}>
-          <Password />
+          <ClaimForm />
+		 
         </Box>
       </Container>
     </Page>

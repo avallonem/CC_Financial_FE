@@ -25,60 +25,60 @@ import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 const data = [
   {
     id: uuid(),
-    ref: 'CDD1049',
-    amount: 30.5,
+    ref: 'Received ETH',
+    amount: 10.5,
     customer: {
-      name: 'Ekaterina Tankova'
+      name: '0x846198724981209847019274'
     },
     createdAt: 1555016400000,
     status: 'pending'
   },
   {
     id: uuid(),
-    ref: 'CDD1048',
+    ref: 'Received ETH',
     amount: 25.1,
     customer: {
-      name: 'Cao Yu'
+      name: '0x846198724981209847019274'
     },
     createdAt: 1555016400000,
     status: 'delivered'
   },
   {
     id: uuid(),
-    ref: 'CDD1047',
+    ref: 'Sent ETH',
     amount: 10.99,
     customer: {
-      name: 'Alexa Richardson'
+      name: '0x846198724981209847019274'
     },
     createdAt: 1554930000000,
     status: 'refunded'
   },
   {
     id: uuid(),
-    ref: 'CDD1046',
+    ref: 'Received ETH',
     amount: 96.43,
     customer: {
-      name: 'Anje Keizer'
+      name: '0x846198724981209847019274'
     },
     createdAt: 1554757200000,
     status: 'pending'
   },
   {
     id: uuid(),
-    ref: 'CDD1045',
+    ref: 'Received ETH',
     amount: 32.54,
     customer: {
-      name: 'Clarke Gillebert'
+      name: '0x846198724981209847019274'
     },
     createdAt: 1554670800000,
     status: 'delivered'
   },
   {
     id: uuid(),
-    ref: 'CDD1044',
+    ref: 'Sent ETH',
     amount: 16.76,
     customer: {
-      name: 'Adam Denisov'
+      name: '0x846198724981209847019274'
     },
     createdAt: 1554670800000,
     status: 'delivered'
@@ -101,7 +101,7 @@ const LatestOrders = ({ className, ...rest }) => {
       className={clsx(classes.root, className)}
       {...rest}
     >
-      <CardHeader title="Latest Orders" />
+      <CardHeader title="Platform Transaction History" />
       <Divider />
       <PerfectScrollbar>
         <Box minWidth={800}>
@@ -128,7 +128,7 @@ const LatestOrders = ({ className, ...rest }) => {
                   </Tooltip>
                 </TableCell>
                 <TableCell>
-                  Status
+                  Amount
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -144,13 +144,14 @@ const LatestOrders = ({ className, ...rest }) => {
                   <TableCell>
                     {order.customer.name}
                   </TableCell>
+			
                   <TableCell>
                     {moment(order.createdAt).format('DD/MM/YYYY')}
                   </TableCell>
                   <TableCell>
                     <Chip
                       color="primary"
-                      label={order.status}
+                      label={order.amount}
                       size="small"
                     />
                   </TableCell>

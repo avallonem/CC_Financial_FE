@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   Container,
   Grid,
@@ -7,12 +7,16 @@ import {
 import Page from 'src/components/Page';
 import Budget from './Budget';
 import LatestOrders from './LatestOrders';
-import LatestProducts from './LatestProducts';
+import AvailableAssets from './AvailableAssets';
+import DepositAsset from './DepositAsset';
 import Sales from './Sales';
 import TasksProgress from './TasksProgress';
 import TotalCustomers from './TotalCustomers';
 import TotalProfit from './TotalProfit';
 import TrafficByDevice from './TrafficByDevice';
+import Wallet from './Wallet';
+import Keycloak from 'keycloak-js';
+import keycloak from 'src/';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,11 +27,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+
 const Dashboard = () => {
   const classes = useStyles();
-
+  if(keycloak.hasRealmRole('Customer')){
   return (
-    <Page
+    
+      <Page
       className={classes.root}
       title="Dashboard"
     >
@@ -38,7 +44,7 @@ const Dashboard = () => {
         >
           <Grid
             item
-            lg={3}
+            lg={6}
             sm={6}
             xl={3}
             xs={12}
@@ -47,61 +53,80 @@ const Dashboard = () => {
           </Grid>
           <Grid
             item
-            lg={3}
+            lg={6}
             sm={6}
             xl={3}
             xs={12}
           >
             <TotalCustomers />
           </Grid>
+          
           <Grid
             item
-            lg={3}
-            sm={6}
+            lg={4}
+            md={6}
             xl={3}
             xs={12}
           >
-            <TasksProgress />
+            <Wallet />
           </Grid>
-          <Grid
-            item
-            lg={3}
-            sm={6}
-            xl={3}
-            xs={12}
-          >
-            <TotalProfit />
-          </Grid>
-          <Grid
+		  <Grid
             item
             lg={8}
             md={12}
             xl={9}
             xs={12}
           >
-            <Sales />
+            <LatestOrders />
           </Grid>
           <Grid
             item
-            lg={4}
-            md={6}
+            lg={12}
+            md={12}
+            xl={9}
+            xs={12}
+          >
+            <DepositAsset />
+          </Grid>
+        </Grid>
+      </Container>
+    </Page>
+   
+  );
+  }
+  else if(keycloak.hasRealmRole('Provider')){return(
+
+<Page
+      className={classes.root}
+      title="Dashboard"
+    >
+      <Container maxWidth={false}>
+        <Grid
+          container
+          spacing={3}
+        >
+          <Grid
+            item
+            lg={6}
+            sm={6}
             xl={3}
             xs={12}
           >
-            <TrafficByDevice />
+            <Budget />
           </Grid>
           <Grid
             item
-            lg={4}
-            md={6}
+            lg={6}
+            sm={6}
             xl={3}
             xs={12}
           >
-            <LatestProducts />
+            <TotalCustomers />
           </Grid>
-          <Grid
+        
+		  <Grid
             item
-            lg={8}
+            lg={12}
             md={12}
             xl={9}
             xs={12}
@@ -111,7 +136,10 @@ const Dashboard = () => {
         </Grid>
       </Container>
     </Page>
-  );
+
+
+  )}
+
 };
 
 export default Dashboard;

@@ -1,5 +1,5 @@
-import React, { useState} from 'react';
-import {useEffect} from 'react';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
@@ -19,50 +19,39 @@ import {
 } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
-
-
-const styles = theme => ({
-  root: {
-    width: '100%',
+import FormDialog from './FormDialog';
+const data = [
+  {
+    id: uuid(),
+    name: 'Dropbox',
+    imageUrl: '/static/images/products/product_1.png',
+    updatedAt: moment().subtract(2, 'hours')
   },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
+  {
+    id: uuid(),
+    name: 'Medium Corporation',
+    imageUrl: '/static/images/products/product_2.png',
+    updatedAt: moment().subtract(2, 'hours')
   },
-  secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
+  {
+    id: uuid(),
+    name: 'Slack',
+    imageUrl: '/static/images/products/product_3.png',
+    updatedAt: moment().subtract(3, 'hours')
   },
-  icon: {
-    verticalAlign: 'bottom',
-    height: 20,
-    width: 20,
+  {
+    id: uuid(),
+    name: 'Lyft',
+    imageUrl: '/static/images/products/product_4.png',
+    updatedAt: moment().subtract(5, 'hours')
   },
-  details: {
-    alignItems: 'center',
-  },
-  column: {
-    flexBasis: '33.33%',
-  },
-  helper: {
-    borderLeft: `2px solid ${theme.palette.divider}`,
-    padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
-  },
-  link: {
-    color: theme.palette.primary.main,
-    textDecoration: 'none',
-    '&:hover': {
-      textDecoration: 'underline',
-    },
-  },
-});
-
+  {
+    id: uuid(),
+    name: 'GitHub',
+    imageUrl: '/static/images/products/product_5.png',
+    updatedAt: moment().subtract(9, 'hours')
+  }
+];
 
 const useStyles = makeStyles(({
   root: {
@@ -74,7 +63,7 @@ const useStyles = makeStyles(({
   }
 }));
 
-const ProductListView = ({ className, ...rest }) => {
+const DepositAsset = ({ className, ...rest }) => {
   const classes = useStyles();
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -107,7 +96,8 @@ const ProductListView = ({ className, ...rest }) => {
   } else if (!isLoaded) {
     return <div>Loading...</div>;
   } else {
-      return (
+
+  return (
     <Card
       className={clsx(classes.root, className)}
       {...rest}
@@ -117,34 +107,33 @@ const ProductListView = ({ className, ...rest }) => {
         title="Owned Financial Assets"
       />
       <Divider />
+      <List>
         {products.map((product, i) => (
-          <ExpansionPanel>
-             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes.heading}>{product.asset_title}</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-		  {product.asset_description}
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
+          <ListItem
+            divider={i < products.length - 1}
+            key={product.id}
+          >
+            <ListItemText
+              primary={product.asset_title}
+            />
+                <FormDialog/>
+          </ListItem>
         ))}
+      </List>
       <Divider />
       <Box
         display="flex"
         justifyContent="flex-end"
         p={2}
       >
-       
+    
       </Box>
     </Card>
   );
 };
 }
-
-ProductListView.propTypes = {
+DepositAsset.propTypes = {
   className: PropTypes.string
 };
 
-export default ProductListView;
-
+export default DepositAsset;

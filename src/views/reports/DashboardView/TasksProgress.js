@@ -45,13 +45,13 @@ const TasksProgress = ({ className, ...rest }) => {
               gutterBottom
               variant="h6"
             >
-              TASKS PROGRESS
+              AVERAGE ANNUAL PROFIT
             </Typography>
             <Typography
               color="textPrimary"
               variant="h3"
             >
-              75.5%
+              23,3%
             </Typography>
           </Grid>
           <Grid item>
@@ -62,7 +62,7 @@ const TasksProgress = ({ className, ...rest }) => {
         </Grid>
         <Box mt={3}>
           <LinearProgress
-            value={75.5}
+            value={23.3}
             variant="determinate"
           />
         </Box>

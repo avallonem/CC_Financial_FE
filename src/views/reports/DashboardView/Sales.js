@@ -28,12 +28,12 @@ const Sales = ({ className, ...rest }) => {
     datasets: [
       {
         backgroundColor: colors.indigo[500],
-        data: [18, 5, 19, 27, 29, 19, 20],
+        data: [10,11, 13, 15, 17, 6, 6],
         label: 'This year'
       },
       {
-        backgroundColor: colors.grey[200],
-        data: [11, 20, 12, 29, 30, 25, 13],
+        backgroundColor: colors.red[600],
+        data: [9, 9, 10, 11, 12, 21, 21],
         label: 'Last year'
       }
     ],
@@ -110,7 +110,7 @@ const Sales = ({ className, ...rest }) => {
             Last 7 days
           </Button>
         )}
-        title="Latest Sales"
+        title="Wallet trend"
       />
       <Divider />
       <CardContent>

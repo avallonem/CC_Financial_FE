@@ -49,7 +49,7 @@ const TotalProfit = ({ className, ...rest }) => {
               color="textPrimary"
               variant="h3"
             >
-              $23,200
+              ETH 3,7675
             </Typography>
           </Grid>
           <Grid item>
